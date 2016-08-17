@@ -1,12 +1,14 @@
 body {
   background-color: #ccc;
-  padding: 15% 20%;
   margin: 0; }
+
+.selecionado {
+  background-color: #ccc !important; }
 
 .demo {
   background-color: rgba(0, 0, 0, 0.8);
-  margin: 0 auto;
-  width: 25%;
+  margin: 15% auto 15% auto;
+  width: 30%;
   text-align: center;
   padding: 15%;
   color: #FFF;
@@ -18,23 +20,33 @@ body {
   .demo table {
     margin: 0 auto; }
     .demo table th {
-      background-color: #FFF; }
-    .demo table tr td:first-child {
-      background-color: #000;
-      color: #fff; }
-    .demo table tr td:last-child {
-      color: #fff; }
-  .demo input[type="text"] {
+      background-color: #FFF;
+      border: none; }
+    .demo table tr {
+      background-color: #000; }
+      .demo table tr td {
+        color: #fff;
+        border: none; }
+  .demo input[type="text"], .demo select {
     width: 100%;
     margin: 10px 0;
     border: none;
     padding: 5px; }
   .demo button {
     padding: 15px 10px;
+    margin: 15px 0;
     border: none;
     background-color: #CCC;
     color: #111;
     cursor: pointer;
     width: 100%; }
+
+footer {
+  background-color: #000;
+  width: 100%;
+  padding: 20px 10px; }
+  footer p {
+    color: #fff;
+    font-size: 16px; }
 
 /*# sourceMappingURL=style.css.map */
