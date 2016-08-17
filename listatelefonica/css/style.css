@@ -1,0 +1,40 @@
+body {
+  background-color: #ccc;
+  padding: 15% 20%;
+  margin: 0; }
+
+.demo {
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 0 auto;
+  width: 25%;
+  text-align: center;
+  padding: 15%;
+  color: #FFF;
+  font-family: arial sans-serif;
+  font-size: 16px; }
+  .demo h4 {
+    background-color: #000;
+    padding: 15px 10px; }
+  .demo table {
+    margin: 0 auto; }
+    .demo table th {
+      background-color: #FFF; }
+    .demo table tr td:first-child {
+      background-color: #000;
+      color: #fff; }
+    .demo table tr td:last-child {
+      color: #fff; }
+  .demo input[type="text"] {
+    width: 100%;
+    margin: 10px 0;
+    border: none;
+    padding: 5px; }
+  .demo button {
+    padding: 15px 10px;
+    border: none;
+    background-color: #CCC;
+    color: #111;
+    cursor: pointer;
+    width: 100%; }
+
+/*# sourceMappingURL=style.css.map */
