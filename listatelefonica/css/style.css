@@ -8,7 +8,7 @@ body {
 .demo {
   background-color: rgba(0, 0, 0, 0.8);
   margin: 15% auto 15% auto;
-  width: 30%;
+  width: 55%;
   text-align: center;
   padding: 15%;
   color: #FFF;
@@ -40,6 +40,14 @@ body {
     color: #111;
     cursor: pointer;
     width: 100%; }
+  .demo .validacao {
+    background-color: rgba(255, 0, 0, 0.5);
+    text-align: center;
+    color: #FFF;
+    font-size: 20px;
+    font-family: Arial sans-serif;
+    padding: 15px 10px;
+    margin: 15px 0; }
 
 footer {
   background-color: #000;
@@ -47,6 +55,6 @@ footer {
   padding: 20px 10px; }
   footer p {
     color: #fff;
-    font-size: 16px; }
+    font-size: 15px; }
 
 /*# sourceMappingURL=style.css.map */
