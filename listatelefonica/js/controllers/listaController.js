@@ -1,10 +1,10 @@
-angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope, $http){
+angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope, contatosAPI, operadorasAPI, serialGenerator){
 	$scope.app = "Lista Telefonica";
 	$scope.contatos = [];
 	$scope.operadoras = [];
 
 	var carregarContatos = function(){
-		$http.get("json/contatos.json").success(function(data){
+		contatosAPI.getContatos().success(function(data){
 			$scope.contatos = data;
 		}).error(function(data,status){
 			$scope.message = "Aconteceu um problema: " + data;
@@ -12,7 +12,7 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($sc
 	};
 
 	var carregarOperadoras = function(){
-		$http.get("json/operadoras.json").success(function(data){
+		operadorasAPI.getOperadoras().success(function(data){
 			$scope.operadoras = data;
 		});
 	};
@@ -21,11 +21,11 @@ angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($sc
 
 	$scope.adicionarContato = function(contato){
 		//$scope.contatos.push(angular.copy(contato));
-		$http.post("json/contatos.json", contato).success(function(data){
+		contato.serial = serialGenerator.generate();
+		contato.data = new Date();
+		contatosAPI.saveContato(contato).success(function(data){
 			$scope.contatoForm.$setPristine();
 			delete $scope.contato;
-			$scope.contatoForm.$setPristine();
-			console.log(data)
 			$scope.contatos.push(angular.copy(contato));
 		});
 	};

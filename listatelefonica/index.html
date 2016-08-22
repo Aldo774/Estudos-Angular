@@ -6,8 +6,12 @@
 	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
 	<script type="text/javascript" src="lib/angular/angular-messages.js"></script>
 	<script type="text/javascript" src="lib/angular/angular-locale_pt-br.js"></script>
-	<script type="text/javascript" src="script/app.js"></script>
-	<script type="text/javascript" src="script/controllers/listaController.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/listaController.js"></script>
+	<script type="text/javascript" src="js/services/contatosAPIservice.js"></script>
+	<script type="text/javascript" src="js/services/operadorasAPIservice.js"></script>
+	<script type="text/javascript" src="js/value/configValue.js"></script>
+	<script type="text/javascript" src="js/services/serialGeneratorService.js"></script>	
 </head>
 <body>
 	<div class="demo" ng-controller="listaTelefonicaCtrl">
@@ -21,6 +25,7 @@
 				<th><a href="" ng-click="ordenarPor('telefone')">Telefone</a></th>
 				<th>Operadora</th>
 				<th>Data</th>
+				<th>Serial</th>
 			</tr>
 			<!--tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:{nome: criterioDeBusca}"-->
 			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | limitTo: 3 | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
@@ -29,6 +34,7 @@
 				<td>{{contato.telefone}}</td>
 				<td>{{contato.operadora.nome | lowercase}}</td>
 				<td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
+				<td>{{contato.serial}}</td>
 			</tr>
 		</table>
 		<!--
