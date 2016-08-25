@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<title>AJAX</title>
+	</head>
+	<body>
+		<div id="ajax" class="demo">
+			<h3>AJAX - DEMONSTRAÇÃO</h3>
+		</div>
+		<script type="text/javascript">
+			var get = function(url,callback){
+				var xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function(){
+					if(xhr.readState === 4){
+						callback(xhr.responseText, xhr.status);
+					}
+				};
+				xhr.open('GET',url);
+				xhr.send(null);
+			};
+		</script>
+	</body>
+</html>

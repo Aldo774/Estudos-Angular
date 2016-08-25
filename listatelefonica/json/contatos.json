@@ -1,0 +1,35 @@
+[
+	{
+		"nome" : "bruno dos santos",
+		"telefone" : "9999-2222",
+		"data" : "2015-04-12T12:53:46.204Z",
+		"operadora" : {
+			"nome": "Oi",
+			"codigo": 14,
+			"categoria": "Celular"
+		},
+		"serial" : "wertyuiop]~çlkjhgfds"
+	},
+	{
+		"nome" : "sandra silva",
+		"telefone" : "9999-3333",
+		"data" : "2015-04-12T12:53:46.204Z",
+		"operadora" : {
+			"nome": "Vivo",
+			"codigo": 15,
+			"categoria": "Celular"
+		},
+		"serial" : "~çlkjhgfdszxcvbnm,.;"
+	},
+	{
+		"nome" : "mariana maria",
+		"telefone" : "9999-4444",
+		"data" : "2015-04-12T12:53:46.204Z",
+		"operadora" : {
+			"nome": "Tim",
+			"codigo": 41,
+			"categoria": "Celular"
+		},
+		"serial" : "zxcvbnm,.;~çlkjhgfds"
+	}
+]

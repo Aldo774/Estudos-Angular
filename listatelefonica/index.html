@@ -1,72 +1,77 @@
 <html ng-app="listaTelefonica">
 <head>
+	<meta charset="UTF-8">
 	<title>Lista Telefonica</title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script type="text/javascript" src="script/angular.min.js"></script>
-	<script type="text/javascript">
-		angular.module("listaTelefonica", []);
-		angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function($scope){
-			$scope.app = "Lista Telefonica";
-			$scope.contatos = [{nome: "Pedro", telefone: "9999-9999"},
-							   {nome: "José", telefone: "9999-9991"},
-							   {nome: "Maria", telefone: "9999-9992"},
-							   {nome: "Joana", telefone: "9999-9993"}
-			];
-			$scope.operadoras = [
-				{nome: "Oi", codigo: 14, categoria: "Celular"},
-				{nome: "Vivo", codigo: 15, categoria: "Celular"},
-				{nome: "Tim", codigo: 41, categoria: "Celular"},
-				{nome: "GVT", codigo: 25, categoria: "Fixo"},
-				{nome: "Embratel", codigo: 21, categoria: "Fixo"}
-			];
+	<script type="text/javascript" src="lib/angular/angular.min.js"></script>
+	<script type="text/javascript" src="lib/angular/angular-messages.js"></script>
+	<script type="text/javascript" src="lib/angular/angular-locale_pt-br.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/listaController.js"></script>
+	<script type="text/javascript" src="js/services/contatosAPIservice.js"></script>
+	<script type="text/javascript" src="js/services/operadorasAPIservice.js"></script>
+	<script type="text/javascript" src="js/value/configValue.js"></script>
+	<script type="text/javascript" src="js/services/serialGeneratorService.js"></script>
+	<script type="text/javascript" src="js/filters/nameFilter.js"></script>
+	<script type="text/javascript" src="js/filters/ellipsisFilter.js"></script>
+	<script type="text/javascript" src="js/directives/uiAlertDirective.js"></script>
 
-			$scope.selecionado = "selecionado";
-
-			$scope.adicionarContato = function(contato){
-				$scope.contatos.push(angular.copy(contato));
-				delete $scope.contato;
-			};
-
-			$scope.apagarContato = function(contatos){
-				$scope.contatos = contatos.filter(function(contato){
-					if(!contato.selecionado) return contato;
-				});
-			};
-
-			$scope.isContatoSelecionado = function(contatos){
-				return contatos.some(function(contato){
-					return contato.selecionado;
-				});
-			};		
-
-		});
-	</script>
 </head>
 <body>
 	<div class="demo" ng-controller="listaTelefonicaCtrl">
 		<h4>{{app}}</h4>
+		<alerta-de-erro title="Ops, acoteceu um problema" message="error">
+			Não foi possível carregar os dados
+		</alerta-de-erro>
+		<input type="text" ng-model="criterioDeBusca" placeholder="Pesquisar">
 		<table ng-show="contatos.length > 0">
 			<tr>
 				<th></th>
-				<th>Nome</th>
-				<th>Telefone</th>
+				<th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
+				<th><a href="" ng-click="ordenarPor('telefone')">Telefone</a></th>
 				<th>Operadora</th>
+				<th>Data</th>
+				<th>Serial</th>
 			</tr>
-			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos">
+			<!--tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:{nome: criterioDeBusca}"-->
+			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | limitTo: 3 | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
 				<td><input type="checkbox" ng-model="contato.selecionado"></td>
-				<td>{{contato.nome}}</td>
+				<td>{{contato.nome | name}}</td>
 				<td>{{contato.telefone}}</td>
-				<td>{{contato.operadora.nome}}</td>
+				<td>{{contato.operadora.nome | lowercase}}</td>
+				<td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
+				<td>{{contato.serial | ellipsis:7}}</td>
 			</tr>
 		</table>
-		<input class="inptexto" type="text" ng-model="contato.nome"/>
-		<input class="inptexto" type="text" ng-model="contato.telefone"/>
-		<select ng-model="contato.operadora" ng-options="operadora.nome group by operadora.categoria for operadora in operadoras">
-			<option value="">Selecione uma operadora</option>
-		</select>
-		<button ng-click="adicionarContato(contato)" ng-disabled="!contato.nome || !contato.telefone">Adicionar Contato</button>
-		<button ng-click="apagarContato(contatos)" ng-disabled="!isContatoSelecionado(contatos)" ng-hide="contatos.length == 0">Apagar Contatos</button>		
+		<!--
+		{{100 | number:1}}
+		-->
+		<form name="contatoForm">
+			<input class="inptexto" type="text" name="nome" ng-model="contato.nome" ng-required="true" ng-minlength="3"/>
+			<input class="inptexto" type="text" name="telefone" ng-model="contato.telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/"/>
+			<select ng-model="contato.operadora" ng-options="operadora.nome + ' ( ' + (operadora.preco | currency) + ' )' group by operadora.categoria for operadora in operadoras | orderBy:'nome'">
+				<option value="">Selecione uma operadora</option>
+			</select>
+			<button ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adicionar Contato</button>
+			<button ng-click="apagarContato(contatos)" ng-disabled="!isContatoSelecionado(contatos)" ng-hide="contatos.length == 0">Apagar Contatos</button>
+		</form>		
+		<div ng-show="contatoForm.nome.$dirty" ng-messages="contatoForm.nome.$error">
+			<div ng-message="required && dirty" class="validacao">
+				Por favor, preecha campo nome!
+			</div>			
+			<div ng-message="minlength" class="validacao">
+				O campo nome deve ter no mínimo 3 caracteres!
+			</div>
+		</div>
+		<div ng-show="contatoForm.telefone.$dirty" ng-messages="contatoForm.telefone.$error">
+			<div ng-message="required && dirty" class="validacao">
+				Por favor, preecha o campo telefone!
+			</div>
+			<div ng-message="pattern" class="validacao">
+				O campo telefone deve ter o formato 99999-9999!
+			</div>
+		</div>
 	</div>
-	<div ng-include="'footer.html'"></div>
+	<div ng-include="'view/footer.html'"></div>
 </body>
 </html>
