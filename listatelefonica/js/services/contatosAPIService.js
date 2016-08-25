@@ -4,7 +4,7 @@ angular.module("listaTelefonica").factory("contatosAPI", function($http, config)
 	o ideal seria conecta-los a uma rotina dinâmica(url) do 
 	server-side(back-end)*/	
 	var _getContatos = function(){
-		return $http.get(config.baseUrl + "/contatos.json");
+		return $http.get(config.baseUrl + "/contatos2.json");
 	};
 
 	var _saveContato = function(contato){

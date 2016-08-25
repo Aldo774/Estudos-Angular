@@ -17,6 +17,16 @@ body {
   .demo h4 {
     background-color: #000;
     padding: 15px 10px; }
+  .demo .erro {
+    background-color: rgba(255, 100, 100, 0.5);
+    width: 100%;
+    padding: 15px 0;
+    margin: 20px 0; }
+    .demo .erro .mensagem-erro-titulo {
+      font-size: 20px;
+      color: #FFDDDD; }
+    .demo .erro .mensagem-erro {
+      font-size: 20px; }
   .demo table {
     margin: 0 auto; }
     .demo table th {

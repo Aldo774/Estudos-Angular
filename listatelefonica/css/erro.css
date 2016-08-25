@@ -1,0 +1,4 @@
+.erro{background-color: rgba(255,100,100,.5); width: 100%; padding: 15px 0; margin: 20px 0;
+	.mensagem-erro-titulo{font-size: 20px; color: #FFDDDD;}
+	.mensagem-erro{font-size: 20px;}
+}

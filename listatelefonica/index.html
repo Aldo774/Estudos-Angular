@@ -13,12 +13,16 @@
 	<script type="text/javascript" src="js/value/configValue.js"></script>
 	<script type="text/javascript" src="js/services/serialGeneratorService.js"></script>
 	<script type="text/javascript" src="js/filters/nameFilter.js"></script>
-	<script type="text/javascript" src="js/filters/ellipsisFilter.js"></script>	
+	<script type="text/javascript" src="js/filters/ellipsisFilter.js"></script>
+	<script type="text/javascript" src="js/directives/uiAlertDirective.js"></script>
+
 </head>
 <body>
 	<div class="demo" ng-controller="listaTelefonicaCtrl">
 		<h4>{{app}}</h4>
-		{{message}}
+		<alerta-de-erro title="Ops, acoteceu um problema" message="error">
+			Não foi possível carregar os dados
+		</alerta-de-erro>
 		<input type="text" ng-model="criterioDeBusca" placeholder="Pesquisar">
 		<table ng-show="contatos.length > 0">
 			<tr>
