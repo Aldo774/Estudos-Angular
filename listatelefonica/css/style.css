@@ -5,6 +5,10 @@ body {
 .selecionado {
   background-color: #ccc !important; }
 
+div img {
+  display: block;
+  margin: 100px auto; }
+
 .demo {
   background-color: rgba(0, 0, 0, 0.8);
   margin: 15% auto 15% auto;
