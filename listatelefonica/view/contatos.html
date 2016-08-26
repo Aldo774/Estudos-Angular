@@ -1,0 +1,41 @@
+	<div class="demo">
+
+		<ui-accordions>
+			<ui-accordion title="Accordion1">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+			</ui-accordion>
+			<ui-accordion title="Accordion2">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+			</ui-accordion>
+		</ui-accordions>
+
+		<h4>{{app}}</h4>
+		<alerta-de-erro title="Ops, acoteceu um problema" ng-if="error" message="error">
+			{{error}}
+		</alerta-de-erro>
+		<input type="text" ng-model="criterioDeBusca" placeholder="Pesquisar"/>
+		<table ng-show="contatos.length > 0">
+			<tr>
+				<th></th>
+				<th><a href="" ng-click="ordenarPor('nome')">Nome</a></th>
+				<th><a href="" ng-click="ordenarPor('telefone')">Telefone</a></th>
+				<th>Operadora</th>
+				<th>Data</th>
+				<th>Serial</th>
+			</tr>
+			<!--tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:{nome: criterioDeBusca}"-->
+			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | limitTo: 3 | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+				<td><input type="checkbox" ng-model="contato.selecionado"/></td>
+				<td><a href="#/detalhesContato/{{contato.id}}">{{contato.nome | name}}</a></td>
+				<td>{{contato.telefone}}</td>
+				<td>{{contato.operadora.nome | lowercase}}</td>
+				<td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
+				<td>{{contato.serial | ellipsis:7}}</td>
+			</tr>
+		</table>
+		<!--
+		{{100 | number:1}}
+		-->
+			<button ng-click="apagarContato(contatos)" ng-disabled="!isContatoSelecionado(contatos)" ng-hide="contatos.length == 0">Apagar Contatos</button>		
+		<a href="#/novoContato">Novo Contato</a>
+	</div>

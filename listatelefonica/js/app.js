@@ -1,1 +1,1 @@
-angular.module("listaTelefonica", ["ngMessages", "serialGenerator", "uiAccordion"]);
+angular.module("listaTelefonica", ["ngMessages", "serialGenerator", "uiAccordion", "ngRoute"]);
