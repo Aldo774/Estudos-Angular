@@ -13,7 +13,7 @@
 		<alerta-de-erro title="Ops, acoteceu um problema" ng-if="error" message="error">
 			{{error}}
 		</alerta-de-erro>
-		<input type="text" ng-model="criterioDeBusca" placeholder="Pesquisar"/>
+		<input type="text" ng-model="criterioDeBusca" ng-model-options="{updateOn: 'default blur', debounce:{default: 500, blur: 0}}" placeholder="Pesquisar"/>
 		<table ng-show="contatos.length > 0">
 			<tr>
 				<th></th>
@@ -24,13 +24,13 @@
 				<th>Serial</th>
 			</tr>
 			<!--tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | filter:{nome: criterioDeBusca}"-->
-			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | limitTo: 3 | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
+			<tr ng-class="{selecionado: contato.selecionado}" ng-repeat="contato in contatos | limitTo: 3 | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao track by contato.id">
 				<td><input type="checkbox" ng-model="contato.selecionado"/></td>
 				<td><a href="#/detalhesContato/{{contato.id}}">{{contato.nome | name}}</a></td>
-				<td>{{contato.telefone}}</td>
-				<td>{{contato.operadora.nome | lowercase}}</td>
-				<td>{{contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
-				<td>{{contato.serial | ellipsis:7}}</td>
+				<td>{{::contato.telefone}}</td>
+				<td>{{::contato.operadora.nome | lowercase}}</td>
+				<td>{{::contato.data | date:'dd/MM/yyyy HH:mm'}}</td>
+				<td>{{::contato.serial | ellipsis:7}}</td>
 			</tr>
 		</table>
 		<!--
